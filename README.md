@@ -34,11 +34,11 @@ In this lesson you'll be creating a simple Express based API in node, just to ge
 * test command - `yarn test-routes` or `npm run test-routes`
 
 This exercise will have you creating routes and sub routers for our soon the be DB resources using Express routing and routers
-- [ ] create a router for the Item resource
-- [ ] create full crud routes and create placeholder controllers
-- [ ] mount router on the root server
-- [ ] ensure all tests pass by running test command
-
+- [X] create a router for the Item resource
+- [X] create full crud routes and create placeholder controllers
+- [X] mount router on the root server
+- [X] ensure all tests pass by running test command
+test
 ### Create Schemas
 * branch - `lesson-3`
 * test command - `yarn test-models` or `npm run test-models`
