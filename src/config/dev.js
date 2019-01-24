@@ -1,6 +1,6 @@
 export const config = {
   secrets: {
-    jwt: 'learneverything'
+    jwt: 'learneverythingkk'
   },
-  dbUrl: process.env.MONGO_DB_URI
+  dbUrl: process.env.MONGODB_URI
 }

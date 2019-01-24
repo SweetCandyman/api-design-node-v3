@@ -4,6 +4,13 @@ import options from '../config'
 export const connect = (url = options.dbUrl, opts = {}) => {
   return mongoose.connect(
     url,
-    { ...opts, useNewUrlParser: true }
+    {
+      auth: {
+        user: process.env.MONGO_DB_USER,
+        password: process.env.MONGO_DB_PASSWORD
+      },
+      useNewUrlParser: true,
+      useCreateIndex: true
+    }
   )
 }
