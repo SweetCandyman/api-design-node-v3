@@ -1,6 +1,6 @@
 import { Router } from 'express'
-// import controllers from './item.controllers'
 
+// Mock controller
 const controller = (req, res) => {
   res.send({ message: 'Hello from controller' })
 }

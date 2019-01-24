@@ -9,8 +9,7 @@ import dotenv from 'dotenv'
 dotenv.config()
 const models = { User, List, Item }
 
-const url = process.env.MONGODB_URI || process.env.DB_URL
-console.log(url)
+const url = process.env.MONGODB_URI
 
 global.newId = () => {
   return mongoose.Types.ObjectId()

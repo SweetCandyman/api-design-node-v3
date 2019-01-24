@@ -5,9 +5,7 @@ import config from './config'
 import cors from 'cors'
 import { connect } from './utils/db'
 import itemRouter from './resources/item/item.router'
-import dotenv from 'dotenv'
 
-dotenv.config()
 export const app = express()
 
 app.disable('x-powered-by')
