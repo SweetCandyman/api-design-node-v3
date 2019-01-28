@@ -35,7 +35,7 @@ beforeEach(async done => {
         url,
         {
           auth: {
-            user: process.env.MONGO_DB_USER,
+            user: process.env.MONG~O_DB_USER,
             password: process.env.MONGO_DB_PASSWORD
           },
           useNewUrlParser: true,
