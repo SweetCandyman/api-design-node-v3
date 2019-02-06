@@ -4,7 +4,9 @@ import _ from 'lodash'
 import { Item } from './src/resources/item/item.model'
 import { List } from './src/resources/list/list.model'
 import { User } from './src/resources/user/user.model'
+import dotenv from 'dotenv'
 
+dotenv.config()
 const models = { User, List, Item }
 
 const url =
@@ -33,8 +35,12 @@ beforeEach(async done => {
   if (mongoose.connection.readyState === 0) {
     try {
       await mongoose.connect(
-        url + db,
+        url,
         {
+          auth: {
+            user: process.env.MONGO_DB_USER,
+            password: process.env.MONGO_DB_PASSWORD
+          },
           useNewUrlParser: true,
           autoIndex: true
         }

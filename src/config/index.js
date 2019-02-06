@@ -1,5 +1,8 @@
 import { merge } from 'lodash'
+import dotenv from 'dotenv'
+
 const env = process.env.NODE_ENV || 'development'
+dotenv.config()
 
 const baseConfig = {
   env,

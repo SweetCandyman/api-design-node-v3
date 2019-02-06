@@ -16,10 +16,66 @@ export const verifyToken = token =>
     })
   })
 
-export const signup = async (req, res) => {}
+export const signup = async (req, res) => {
+  if (!req.body.email || !req.body.password) {
+    return res.status(400).send({ message: 'Email and password required' })
+  }
+  try {
+    // Create user with the defined model
+    const user = await User.create(req.body)
+    // Retrieves a token with the newly created user
+    const token = newToken(user)
+    return res.status(201).send({ token })
+  } catch (e) {
+    console.error(e)
+    return res.status(400).end()
+  }
+}
 
-export const signin = async (req, res) => {}
+export const signin = async (req, res) => {
+  if (!req.body.email || !req.body.password) {
+    return res.status(400).send({ message: 'Email and password required' })
+  }
+  const user = await User.findOne({ email: req.body.email }).exec()
+
+  if (!user) {
+    return res.status(401).send({ message: 'Not auth' })
+  }
+
+  try {
+    const match = await user.checkPassword(req.body.password)
+    if (!match) {
+      return res.status(401).send({ message: 'Not auth' })
+    }
+    const token = newToken(user)
+    return res.status(201).send({ token })
+  } catch (error) {
+    console.error(error)
+    return res.status(401).send({ message: 'Not auth' })
+  }
+}
 
 export const protect = async (req, res, next) => {
-  next()
+  if (!req.headers.authorization) {
+    return res.status(401).end()
+  }
+  let token = req.headers.authorization.split('Bearer ')[1]
+  if (!token) {
+    return res.status(401).end()
+  }
+
+  try {
+    const payload = await verifyToken(token)
+    console.log(payload)
+    // Jwt sign was with the id
+    const user = await User.findById(payload.id)
+      .select('-password')
+      .lean()
+      .exec()
+    req.user = user
+    next()
+  } catch (error) {
+    console.error(error)
+    return res.status(401).end()
+  }
 }
