@@ -43,6 +43,7 @@ beforeEach(async done => {
           },
           useNewUrlParser: true,
           autoIndex: true
+        }
       )
       await clearDB()
       await Promise.all(Object.keys(models).map(name => models[name].init()))
